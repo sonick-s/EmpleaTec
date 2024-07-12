@@ -1,0 +1,29 @@
+// Plugin Management: Define repositories for managing Gradle plugins
+pluginManagement {
+    repositories {
+        google {
+            content {
+                includeGroupByRegex("com\\.android.*")
+                includeGroupByRegex("com\\.google.*")
+                includeGroupByRegex("androidx.*")
+            }
+        }
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
+// Dependency Resolution Management: Define how dependencies are resolved
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+// Root Project Name: Set the name of the root project
+rootProject.name = "Empleatec"
+
+// Include Modules: Include the main app module
+include ':app'

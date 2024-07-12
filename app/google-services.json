@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "974559796473",
+    "firebase_url": "https://empleatec-f64fb-default-rtdb.firebaseio.com",
+    "project_id": "empleatec-f64fb",
+    "storage_bucket": "empleatec-f64fb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:974559796473:android:d9feee78e00e856a9d9628",
+        "android_client_info": {
+          "package_name": "com.omar.sani.empleatec"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "974559796473-7ut30eggmor14k970c55prc1dnpvds52.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.omar.sani.empleatec",
+            "certificate_hash": "6391cb1498431e3c4fdc4480fd4d6b9a37f91eb6"
+          }
+        },
+        {
+          "client_id": "974559796473-pdt9194j8scos3h9qe01d1spbsf5le3m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADOzDXScnGyp99qa9z6fvbbvjTwxLTlqk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "974559796473-pdt9194j8scos3h9qe01d1spbsf5le3m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2A322E"
+    tools:context=".login">
+
+    <TextView
+    android:id="@+id/textViewTitulo"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="EmpleaTec"
+    android:textSize="28sp"
+    android:textStyle="bold"
+    android:textColor="#D8CBBB"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:layout_marginTop="32dp" />
+
+<LinearLayout
+android:layout_width="0dp"
+android:layout_height="0dp"
+android:gravity="center"
+android:orientation="vertical"
+app:layout_constraintTop_toBottomOf="@id/textViewTitulo"
+app:layout_constraintStart_toStartOf="parent"
+app:layout_constraintEnd_toEndOf="parent"
+app:layout_constraintBottom_toBottomOf="parent">
+
+<!-- Correo -->
+<EditText
+    android:id="@+id/Correo"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    android:hint="Correo electrónico"
+    android:inputType="textEmailAddress"
+    android:padding="12dp"
+    android:background="@drawable/drlogin"
+    android:textColor="#D8CBBB"
+    android:textColorHint="#8D8071"/>
+
+<!-- Contraseña -->
+<EditText
+    android:id="@+id/Contrasenia"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    android:hint="Contraseña"
+    android:inputType="textPassword"
+    android:padding="12dp"
+    android:background="@drawable/drlogin"
+    android:textColor="#D8CBBB"
+    android:textColorHint="#8D8071" />
+
+<!-- Botón para ingresar -->
+    <Button
+        android:id="@+id/btnIngresar"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/drlogin"
+        android:padding="16dp"
+        android:text="Ingresar"
+        android:textColor="#D8CBBB"
+        android:textSize="16sp" />
+
+<!-- Botón para Google -->
+    <Button
+        android:id="@+id/btnGoogle"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/drlogin"
+        android:padding="16dp"
+        android:text="Ingresar con Google"
+        android:textColor="#D8CBBB"
+        android:textSize="16sp" />
+
+<!-- Botón para registrarse -->
+<Button
+    android:id="@+id/btnRegistrar"
+    android:layout_width="250dp"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    android:text="Registrarse"
+    android:textColor="#D8CBBB"
+    android:background="@drawable/drlogin"
+    android:padding="16dp"
+    android:textSize="16sp" />
+
+</LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>

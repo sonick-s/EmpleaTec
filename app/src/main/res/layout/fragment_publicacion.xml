@@ -1,0 +1,124 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <!-- Barra superior con imagen de perfil, nombre de usuario y categoría -->
+        <LinearLayout
+            android:id="@+id/topBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <!-- Imagen de perfil -->
+            <ImageView
+                android:id="@+id/imageViewProfile"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@drawable/like"/>
+
+            <!-- Nombre de usuario -->
+            <TextView
+                android:id="@+id/textViewUsername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Omar Sani"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_marginStart="8dp"/>
+
+            <!-- Categoría -->
+            <TextView
+                android:id="@+id/textViewCategoria"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Categoría"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_marginStart="8dp"/>
+
+            <!-- Icono de bandera -->
+            <ImageView
+                android:id="@+id/imageViewFlag"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ecuador"
+                android:contentDescription="Bandera del país"
+                android:layout_marginStart="8dp"/>
+        </LinearLayout>
+
+        <!-- Video principal de la publicación -->
+
+        <TextView
+            android:id="@+id/textViewDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/topBar"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="32dp"
+            android:text="Me Complace en Presentar la App EmpleaTec"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/videoViewMain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewDescription"
+            android:layout_marginTop="16dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:layout_centerHorizontal="true"/>
+
+        <!-- Barra de acciones (Like, Mensaje, Compartir) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_below="@id/videoViewMain"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <!-- Botón Like -->
+            <ImageButton
+                android:id="@+id/buttonLike"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:contentDescription="Like"
+                android:src="@drawable/like"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"/>
+
+            <!-- Botón Mensaje -->
+            <ImageButton
+                android:id="@+id/buttonSendMessage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:contentDescription="Enviar Mensaje"
+                android:src="@drawable/enviar"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"/>
+
+            <!-- Botón Compartir -->
+            <ImageButton
+                android:id="@+id/buttonShare"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:contentDescription="Compartir"
+                android:src="@drawable/compartir"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

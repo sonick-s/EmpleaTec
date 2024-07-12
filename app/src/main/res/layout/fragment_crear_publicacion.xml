@@ -1,0 +1,54 @@
+<!-- fragment_crear_publicacion.xml -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/editTextDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="25dp"
+        android:hint="Escuchaste de un Empleo?"
+        android:textSize="14sp" />
+
+    <Spinner
+        android:id="@+id/spinnerCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextDescription"
+        android:layout_marginTop="16dp"/>
+
+    <!-- Imagen seleccionada para la publicación -->
+    <ImageView
+        android:id="@+id/imageViewSelected"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/spinnerCategory"
+        android:layout_marginTop="16dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:contentDescription="Imagen seleccionada"/>
+
+    <!-- Botón para seleccionar una imagen -->
+    <Button
+        android:id="@+id/buttonSelectImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imageViewSelected"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="Seleccionar Imagen"/>
+
+    <!-- Botón para subir la publicación -->
+    <Button
+        android:id="@+id/buttonUploadPost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonSelectImage"
+        android:layout_marginTop="16dp"
+        android:text="Subir Publicación"/>
+
+</RelativeLayout>

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.gallery.GalleryFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Profile Picture -->
+            <ImageView
+                android:id="@+id/profile_picture"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:src="@android:drawable/ic_menu_gallery"
+                android:layout_marginTop="16dp" />
+
+            <!-- User Name -->
+            <TextView
+                android:id="@+id/user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Omar Sani"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp" />
+
+            <!-- User Bio -->
+            <TextView
+                android:id="@+id/user_bio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Amante de la tecnología y la naturaleza. Aquí para compartir mis aventuras."
+                android:textSize="16sp"
+                android:layout_marginTop="8dp" />
+
+            <!-- Contact Information -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#CCCCCC"
+                android:layout_marginTop="16dp" />
+
+            <TextView
+                android:id="@+id/contact_info_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Información de contacto"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp" />
+
+            <TextView
+                android:id="@+id/user_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Correo: juanperez@example.com"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp" />
+
+            <TextView
+                android:id="@+id/user_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Teléfono: +1234567890"
+                android:textSize="16sp"
+                android:layout_marginTop="4dp" />
+
+            <!-- Education -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#CCCCCC"
+                android:layout_marginTop="16dp" />
+
+            <TextView
+                android:id="@+id/education_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Educación"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp" />
+
+            <TextView
+                android:id="@+id/education_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lic. en Ciencias de la Computación\nUniversidad de Tecnología, 2015 - 2019"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp" />
+
+            <!-- Work Experience -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#CCCCCC"
+                android:layout_marginTop="16dp" />
+
+            <TextView
+                android:id="@+id/work_experience_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Experiencia laboral"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp" />
+
+            <TextView
+                android:id="@+id/work_experience_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Desarrollador de Software\nTech Solutions Inc., 2020 - Presente\n\nPracticante\nSoftware Corp, 2019 - 2020"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp" />
+
+            <!-- Skills -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#CCCCCC"
+                android:layout_marginTop="16dp" />
+
+            <TextView
+                android:id="@+id/skills_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Habilidades"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp" />
+
+            <TextView
+                android:id="@+id/skills_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Java, Kotlin, Python, Desarrollo Android, Firebase, SQL, Git"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp" />
+
+            <!-- Projects -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#CCCCCC"
+                android:layout_marginTop="16dp" />
+
+            <TextView
+                android:id="@+id/projects_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Proyectos"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp" />
+
+            <TextView
+                android:id="@+id/projects_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Desarrollo de Aplicaciones Móviles\n- Desarrollé una aplicación de gestión de tareas usando Android y Firebase\n\nDesarrollo Web\n- Creé un sitio web responsivo para un negocio local usando HTML, CSS y JavaScript"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
