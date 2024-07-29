@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".subirEducacionPerfil">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Education -->
+            <TextView
+                android:id="@+id/education_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Educación"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp" />
+
+            <EditText
+                android:id="@+id/education_institution"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Institución Educativa"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp" />
+
+            <EditText
+                android:id="@+id/education_degree"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Título"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp" />
+
+            <EditText
+                android:id="@+id/education_years"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Años (ej. 2015 - 2019)"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp" />
+
+            <TextView
+                android:id="@+id/Categoria_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Categoria"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <!-- Spinner for Categories -->
+            <Spinner
+                android:id="@+id/project_category_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp" />
+
+            <!-- Upload PDF Section -->
+            <TextView
+                android:id="@+id/pdf_upload_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cargar Título en PDF"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp" />
+
+            <Button
+                android:id="@+id/pdf_upload_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Seleccionar PDF"
+                android:layout_marginTop="8dp" />
+
+            <TextView
+                android:id="@+id/pdf_file_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ningún archivo seleccionado"
+                android:textSize="14sp"
+                android:layout_marginTop="8dp" />
+
+            <Button
+                android:id="@+id/education_save_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Guardar"
+                android:layout_marginTop="16dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

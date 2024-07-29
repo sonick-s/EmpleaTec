@@ -1,5 +1,8 @@
 package com.omar.sani.empleatec.controlador.database.login;
 
+import static com.omar.sani.empleatec.controlador.ConfigGmail.IdGmailEmpresa;
+import static com.omar.sani.empleatec.controlador.ConfigGmail.IdGmailUsuario;
+
 import android.view.View;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -24,6 +27,8 @@ public class dbUserPassword {
 
         // Crear un mapa de datos
         Map<String, Object> credenciales = new HashMap<>();
+        credenciales.put("TipoEmpresa", IdGmailEmpresa);
+        credenciales.put("TipoUsuario", IdGmailUsuario);
         credenciales.put("Usuario", username);
         credenciales.put("Contraseña", password);
         credenciales.put("ValidacionContraseña", confirmPassword);

@@ -1,5 +1,8 @@
 package com.omar.sani.empleatec.controlador.database.login;
 
+import static com.omar.sani.empleatec.controlador.ConfigGmail.IdGmailEmpresa;
+import static com.omar.sani.empleatec.controlador.ConfigGmail.IdGmailUsuario;
+
 import android.net.Uri;
 import android.view.View;
 
@@ -23,6 +26,8 @@ public class dbEmpresa {
     public void enviarDatosALaBaseDeDatos(String companyName, String phone, String email, String website, String missionVision, String imageUrl, View view) {
         // Crear un mapa de datos
         Map<String, Object> empresa = new HashMap<>();
+        empresa.put("TipoEmpresa", IdGmailEmpresa);
+        empresa.put("TipoUsuario", IdGmailUsuario);
         empresa.put("Nombre de la Empresa", companyName);
         empresa.put("Telefono Convencional", phone);
         empresa.put("Correo Electronico", email);

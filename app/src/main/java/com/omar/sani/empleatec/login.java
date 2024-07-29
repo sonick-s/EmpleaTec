@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.omar.sani.empleatec.controlador.ConfigGmail;
 import com.omar.sani.empleatec.databinding.ActivityLoginBinding;
 
 import java.util.HashMap;
@@ -129,6 +130,9 @@ public class login extends AppCompatActivity {
     private void enviarDatosAFirestore(FirebaseUser user) {
         String username = user.getEmail(); // Obtener el correo del usuario
 
+        // Guardar el correo electrónico en la variable de ConfigGmail
+        ConfigGmail.IdGmailUsuario = username;
+
         // Crear un mapa de datos con la información del usuario
         Map<String, Object> credenciales = new HashMap<>();
         credenciales.put("Usuario", username);
@@ -139,6 +143,7 @@ public class login extends AppCompatActivity {
                 .addOnSuccessListener(documentReference -> Snackbar.make(binding.getRoot(), "Credenciales enviadas correctamente a Firestore", Snackbar.LENGTH_SHORT).show())
                 .addOnFailureListener(e -> Snackbar.make(binding.getRoot(), "Error al enviar credenciales a Firestore", Snackbar.LENGTH_SHORT).show());
     }
+
 
     private void updateUI(FirebaseUser user) {
         if (user != null) {

@@ -4,52 +4,104 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.omar.sani.empleatec.R;
+import com.omar.sani.empleatec.controlador.database.perfil.dbContacto;
+import com.omar.sani.empleatec.controlador.database.perfil.dbEducacion;
+import com.omar.sani.empleatec.controlador.database.perfil.dbExperienciaLaboral;
+import com.omar.sani.empleatec.controlador.database.perfil.dbHabilidades;
+import com.omar.sani.empleatec.controlador.database.perfil.dbProyectos;
 import com.omar.sani.empleatec.databinding.FragmentGalleryBinding;
+import com.omar.sani.empleatec.mostrarContactoPerfil;
+import com.omar.sani.empleatec.mostrarEducacionPerfil;
+import com.omar.sani.empleatec.mostrarEncabezadoPerfil;
+import com.omar.sani.empleatec.mostrarExperienciaLaboralPerfil;
+import com.omar.sani.empleatec.mostrarHabilidadPerfil;
+import com.omar.sani.empleatec.mostrarProyectosPerfil;
 
 public class GalleryFragment extends Fragment {
 
     private FragmentGalleryBinding binding;
-    private ImageView profilePicture;
-    private TextView userName, userBio, contactInfoTitle, userEmail, userPhone;
-    private TextView educationTitle, educationDetails, workExperienceTitle, workExperienceDetails;
-    private TextView skillsTitle, skillsDetails, projectsTitle, projectsDetails;
+    private dbContacto dbContacto;
+    private dbEducacion dbEducacion;
+    private dbExperienciaLaboral dbExperienciaLaboral;
+    private dbHabilidades dbHabilidad;
+    private dbProyectos dbProyectos;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        GalleryViewModel galleryViewModel =
-                new ViewModelProvider(this).get(GalleryViewModel.class);
-
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentGalleryBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        // Initialize UI components
-        profilePicture = binding.getRoot().findViewById(R.id.profile_picture);
-        userName = binding.getRoot().findViewById(R.id.user_name);
-        userBio = binding.getRoot().findViewById(R.id.user_bio);
-        contactInfoTitle = binding.getRoot().findViewById(R.id.contact_info_title);
-        userEmail = binding.getRoot().findViewById(R.id.user_email);
-        userPhone = binding.getRoot().findViewById(R.id.user_phone);
-        educationTitle = binding.getRoot().findViewById(R.id.education_title);
-        educationDetails = binding.getRoot().findViewById(R.id.education_details);
-        workExperienceTitle = binding.getRoot().findViewById(R.id.work_experience_title);
-        workExperienceDetails = binding.getRoot().findViewById(R.id.work_experience_details);
-        skillsTitle = binding.getRoot().findViewById(R.id.skills_title);
-        skillsDetails = binding.getRoot().findViewById(R.id.skills_details);
-        projectsTitle = binding.getRoot().findViewById(R.id.projects_title);
-        projectsDetails = binding.getRoot().findViewById(R.id.projects_details);
+        // Inicializar las instancias de las clases
+        dbContacto = new dbContacto();
+        dbEducacion = new dbEducacion();
+        dbExperienciaLaboral = new dbExperienciaLaboral();
+        dbHabilidad = new dbHabilidades();
+        dbProyectos = new dbProyectos();
 
-        // Example of setting text programmatically
-        // You can remove or modify this part as needed
+        // Obtener datos de Firebase
+        dbContacto.obtenerDatosContacto(root);
+        dbEducacion.obtenerDatosEducacion(root);
+        dbExperienciaLaboral.obtenerDatosExperiencia(root);
+        dbHabilidad.obtenerDatosHabilidades(root);
+        dbProyectos.obtenerDatosProyectos(root);
+
+        // Cargar los fragmentos
+        loadMostrarExperienciaLaboralPerfilFragment("Param1Value", "Param2Value");
+        loadMostrarContactoPerfilFragment("Param1Value", "Param2Value");
+        loadMostrarEducacionPerfilFragment("Param1Value", "Param2Value");
+        loadMostrarEncabezadoPerfilFragment("Param1Value", "Param2Value");
+        loadMostrarHabilidadPerfilFragment("Param1Value", "Param2Value");
+        loadMostrarProyectosPerfilFragment("Param1Value", "Param2Value");
 
         return root;
+    }
+
+    private void loadMostrarExperienciaLaboralPerfilFragment(String param1, String param2) {
+        mostrarExperienciaLaboralPerfil fragment = mostrarExperienciaLaboralPerfil.newInstance(param1, param2);
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container_experiencia, fragment);
+        transaction.commit();
+    }
+
+    private void loadMostrarContactoPerfilFragment(String param1, String param2) {
+        mostrarContactoPerfil fragment = mostrarContactoPerfil.newInstance(param1, param2);
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container_contacto, fragment);
+        transaction.commit();
+    }
+
+    private void loadMostrarEducacionPerfilFragment(String param1, String param2) {
+        mostrarEducacionPerfil fragment = mostrarEducacionPerfil.newInstance(param1, param2);
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container_educacion, fragment);
+        transaction.commit();
+    }
+
+    private void loadMostrarEncabezadoPerfilFragment(String param1, String param2) {
+        mostrarEncabezadoPerfil fragment = mostrarEncabezadoPerfil.newInstance(param1, param2);
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container_encabezado, fragment);
+        transaction.commit();
+    }
+
+    private void loadMostrarHabilidadPerfilFragment(String param1, String param2) {
+        mostrarHabilidadPerfil fragment = mostrarHabilidadPerfil.newInstance(param1, param2);
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container_habilidad, fragment);
+        transaction.commit();
+    }
+
+    private void loadMostrarProyectosPerfilFragment(String param1, String param2) {
+        mostrarProyectosPerfil fragment = mostrarProyectosPerfil.newInstance(param1, param2);
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container_proyectos, fragment);
+        transaction.commit();
     }
 
     @Override

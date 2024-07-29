@@ -26,11 +26,13 @@ public class dbPublicacion {
                             // Obtener datos de cada documento
                             String description = documentSnapshot.getString("description");
                             String category = documentSnapshot.getString("category");
-                            String imageUrl = documentSnapshot.getString("imageUrl"); // Suponiendo que es la URL de la imagen
+                            String imageUrl = documentSnapshot.getString("imageUrl");
+                            String idGmailUsuario = documentSnapshot.getString("idGmailUsuario");
+                            String idGmailEmpresa = documentSnapshot.getString("idGmailEmpresa");
 
                             // Llamar al método onSuccess del listener para cada documento
                             if (listener != null) {
-                                listener.onSuccess(description, category, Uri.parse(imageUrl));
+                                listener.onSuccess(description, category, Uri.parse(imageUrl), idGmailUsuario, idGmailEmpresa);
                             }
                         }
                     }
@@ -47,7 +49,7 @@ public class dbPublicacion {
     }
 
     public interface OnPublicacionesLoadedListener {
-        void onSuccess(String description, String category, Uri imageUrl);
+        void onSuccess(String description, String category, Uri imageUrl, String idGmailUsuario, String idGmailEmpresa);
         void onFailure(Exception e);
     }
 

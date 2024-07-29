@@ -1,10 +1,15 @@
 package com.omar.sani.empleatec.controlador.database.login;
 
+import static com.omar.sani.empleatec.controlador.ConfigGmail.IdGmailEmpresa;
+import static com.omar.sani.empleatec.controlador.ConfigGmail.IdGmailUsuario;
+
 import android.net.Uri;
 import android.view.View;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -33,6 +38,8 @@ public class dbUsuario {
             public void onSuccess(String imageUrl) {
                 // Crear un mapa de datos con los campos del usuario
                 Map<String, Object> usuario = new HashMap<>();
+                usuario.put("TipoEmpresa", IdGmailEmpresa);
+                usuario.put("TipoUsuario", IdGmailUsuario);
                 usuario.put("Primer Nombre", firstName);
                 usuario.put("Apellido", lastName);
                 usuario.put("Fecha de Nacimiento", dateOfBirth);
@@ -64,8 +71,47 @@ public class dbUsuario {
         }
     }
 
+    public void obtenerDatosDeUsuarios(final OnUsuariosLoadedListener listener) {
+        db.collection("usuarios")
+                .get()
+                .addOnSuccessListener(new com.google.android.gms.tasks.OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                            // Obtener datos de cada documento
+                            String tipoEmpresa = documentSnapshot.getString("TipoEmpresa");
+                            String tipoUsuario = documentSnapshot.getString("TipoUsuario");
+                            String firstName = documentSnapshot.getString("Primer Nombre");
+                            String lastName = documentSnapshot.getString("Apellido");
+                            String dateOfBirth = documentSnapshot.getString("Fecha de Nacimiento");
+                            String email = documentSnapshot.getString("Correo Electronico");
+                            String imageUrl = documentSnapshot.getString("Imagen de Perfil");
+
+                            // Llamar al método onSuccess del listener para cada documento
+                            if (listener != null) {
+                                listener.onSuccess(tipoEmpresa, tipoUsuario, firstName, lastName, dateOfBirth, email, Uri.parse(imageUrl));
+                            }
+                        }
+                    }
+                })
+                .addOnFailureListener(new com.google.android.gms.tasks.OnFailureListener() {
+                    @Override
+                    public void onFailure(Exception e) {
+                        // Manejar el error de obtener datos de usuarios
+                        if (listener != null) {
+                            listener.onFailure(e);
+                        }
+                    }
+                });
+    }
+
     public interface OnImageUploadListener {
         void onSuccess(String imageUrl);
+        void onFailure(Exception e);
+    }
+
+    public interface OnUsuariosLoadedListener {
+        void onSuccess(String tipoEmpresa, String tipoUsuario, String firstName, String lastName, String dateOfBirth, String email, Uri imageUrl);
         void onFailure(Exception e);
     }
 }

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SubirExperienciaLaboralPerfil">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- Work Experience -->
+                <TextView
+                    android:id="@+id/work_experience_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Experiencia laboral"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="16dp" />
+
+                <EditText
+                    android:id="@+id/work_experience_company"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Empresa"
+                    android:textSize="16sp"
+                    android:layout_marginTop="8dp" />
+
+                <EditText
+                    android:id="@+id/work_experience_role"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Cargo"
+                    android:textSize="16sp"
+                    android:layout_marginTop="8dp" />
+
+                <EditText
+                    android:id="@+id/work_experience_duration"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Duración (ej. 2020 - Presente)"
+                    android:textSize="16sp"
+                    android:layout_marginTop="8dp" />
+
+                <EditText
+                    android:id="@+id/work_experience_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Descripción del Trabajo"
+                    android:textSize="16sp"
+                    android:layout_marginTop="8dp" />
+
+                <Button
+                    android:id="@+id/skills_save_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Guardar"
+                    android:layout_marginTop="16dp" />
+
+            </LinearLayout>
+        </ScrollView>
+
+</FrameLayout>

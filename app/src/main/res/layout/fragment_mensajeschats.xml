@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Mensajeschats">
+    <LinearLayout
+        android:id="@+id/layoutMessagesContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/layoutMessages"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Primer TextView alineado a la derecha -->
+        <TextView
+            android:id="@+id/textViewMessage1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Este es el primer mensaje (Derecha)"
+            android:textSize="16sp"
+            android:padding="8dp"
+            android:background="?attr/selectableItemBackground"
+            android:layout_gravity="start" /> <!-- Alineado a la derecha -->
+    </LinearLayout>
+        <!-- Segundo LinearLayout para el segundo mensaje -->
+        <LinearLayout
+            android:id="@+id/layoutMessagesDos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Segundo TextView alineado a la izquierda -->
+            <TextView
+                android:id="@+id/textViewMessageDos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Este es el segundo mensaje (Izquierda)"
+                android:textSize="16sp"
+                android:padding="8dp"
+                android:background="?attr/selectableItemBackground"
+                android:layout_gravity="end" /> <!-- Alineado a la izquierda -->
+
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

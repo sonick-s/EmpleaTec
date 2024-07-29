@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".mostrarContactoPerfil">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Contact Information Title -->
+            <TextView
+                android:id="@+id/contact_info_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Información de contacto"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/primaryTextColor"
+                android:layout_marginBottom="24dp" />
+
+            <!-- Email Field -->
+            <TextView
+                android:id="@+id/user_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Correo Electrónico: usuario@ejemplo.com"
+                android:textSize="16sp"
+                android:textColor="@color/primaryTextColor"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Phone Field -->
+            <TextView
+                android:id="@+id/user_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Número de Teléfono: +1234567890"
+                android:textSize="16sp"
+                android:textColor="@color/primaryTextColor"
+                android:layout_marginBottom="24dp" />
+        </LinearLayout>
+
+</FrameLayout>

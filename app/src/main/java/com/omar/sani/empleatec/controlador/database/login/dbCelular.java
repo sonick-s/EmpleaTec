@@ -1,5 +1,8 @@
 package com.omar.sani.empleatec.controlador.database.login;
 
+import static com.omar.sani.empleatec.controlador.ConfigGmail.IdGmailEmpresa;
+import static com.omar.sani.empleatec.controlador.ConfigGmail.IdGmailUsuario;
+
 import android.view.View;
 import android.widget.Toast;
 
@@ -25,6 +28,8 @@ public class dbCelular {
 
     public void enviarDatosCelular(String countryCode, String phoneNumber, View view) {
         Map<String, Object> phoneData = new HashMap<>();
+        phoneData.put("TipoEmpresa", IdGmailEmpresa);
+        phoneData.put("TipoUsuario", IdGmailUsuario);
         phoneData.put("countryCode", countryCode);
         phoneData.put("phoneNumber", phoneNumber);
 

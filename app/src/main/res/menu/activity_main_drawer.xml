@@ -16,5 +16,6 @@
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/enviar"
             android:title="Chats" />
+
     </group>
 </menu>

@@ -8,6 +8,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.omar.sani.empleatec.controlador.ConfigGmail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +42,7 @@ public class dbCrearPublicacion {
             imageRef.getDownloadUrl().addOnSuccessListener(uri -> {
                 String imageUrl = uri.toString();
                 // Guardar los datos de la publicación en Firestore
-                guardarPublicacionFirestore(description, category, imageUrl, listener);
+                guardarPublicacionFirestore(description, category, imageUrl, ConfigGmail.IdGmailUsuario, ConfigGmail.IdGmailEmpresa, listener);
             }).addOnFailureListener(e -> {
                 Log.e(TAG, "Error al obtener la URL de la imagen", e);
                 if (listener != null) {
@@ -56,9 +57,9 @@ public class dbCrearPublicacion {
         });
     }
 
-    private void guardarPublicacionFirestore(String description, String category, String imageUrl, OnPublicacionUploadListener listener) {
+    private void guardarPublicacionFirestore(String description, String category, String imageUrl, String idGmailUsuario, String idGmailEmpresa, OnPublicacionUploadListener listener) {
         // Crear un nuevo objeto Publicacion
-        Publicacion publicacion = new Publicacion(description, category, imageUrl);
+        Publicacion publicacion = new Publicacion(description, category, imageUrl, idGmailUsuario, idGmailEmpresa);
 
         // Guardar la publicación en Firestore
         db.collection("publicaciones")
@@ -86,7 +87,9 @@ public class dbCrearPublicacion {
                             String description = document.getString("description");
                             String category = document.getString("category");
                             String imageUrl = document.getString("imageUrl");
-                            Publicacion publicacion = new Publicacion(description, category, imageUrl);
+                            String idGmailUsuario = document.getString("IdGmailUsuario");
+                            String idGmailEmpresa = document.getString("IdGmailEmpresa");
+                            Publicacion publicacion = new Publicacion(description, category, imageUrl, idGmailUsuario, idGmailEmpresa);
                             listaPublicaciones.add(publicacion); // Agregar la publicación a la lista interna
                         }
                         if (listener != null) {
@@ -115,11 +118,15 @@ public class dbCrearPublicacion {
         private String description;
         private String category;
         private String imageUrl;
+        private String idGmailUsuario;
+        private String idGmailEmpresa;
 
-        public Publicacion(String description, String category, String imageUrl) {
+        public Publicacion(String description, String category, String imageUrl, String idGmailUsuario, String idGmailEmpresa) {
             this.description = description;
             this.category = category;
             this.imageUrl = imageUrl;
+            this.idGmailUsuario = idGmailUsuario;
+            this.idGmailEmpresa = idGmailEmpresa;
         }
 
         public String getDescription() {
@@ -132,6 +139,14 @@ public class dbCrearPublicacion {
 
         public String getImageUrl() {
             return imageUrl;
+        }
+
+        public String getIdGmailUsuario() {
+            return idGmailUsuario;
+        }
+
+        public String getIdGmailEmpresa() {
+            return idGmailEmpresa;
         }
     }
 }

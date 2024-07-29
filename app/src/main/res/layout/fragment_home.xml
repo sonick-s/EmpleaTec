@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
 
-    <!-- ScrollView para permitir el desplazamiento -->
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -15,38 +15,37 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- FrameLayout para crear publicación -->
             <FrameLayout
                 android:id="@+id/crearPublicacionContainer"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <!-- Contenido de creación de publicación aquí si es necesario -->
-            </FrameLayout>
+                android:layout_height="wrap_content"/>
 
-            <!-- Publicaciones -->
             <LinearLayout
                 android:id="@+id/linearPublicaciones"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <!-- Aquí se agregarán dinámicamente las publicaciones -->
-            </LinearLayout>
+                android:orientation="vertical"/>
 
-            <!-- FrameLayout para la última publicación -->
             <FrameLayout
                 android:id="@+id/publicacionContainer"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <!-- Contenido de última publicación aquí si es necesario -->
-            </FrameLayout>
+                android:layout_height="wrap_content"/>
 
         </LinearLayout>
 
     </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"/> <!-- Oculto por defecto -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

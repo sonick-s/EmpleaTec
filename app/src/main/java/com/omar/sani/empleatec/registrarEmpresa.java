@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.omar.sani.empleatec.controlador.ConfigGmail;
 import com.omar.sani.empleatec.controlador.database.login.dbEmpresa;
 
 public class registrarEmpresa extends AppCompatActivity {
@@ -73,6 +74,9 @@ public class registrarEmpresa extends AppCompatActivity {
                     String email = etEmail.getText().toString();
                     String website = etWebsite.getText().toString();
                     String missionVision = etMissionVision.getText().toString();
+
+
+                    ConfigGmail.IdGmailEmpresa = email;
 
                     if (imageUri != null) {
                         dbEmpresaHelper.subirImagenAFirebase(imageUri, new dbEmpresa.OnImageUploadListener() {

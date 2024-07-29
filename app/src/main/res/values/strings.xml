@@ -16,5 +16,7 @@
     <string name="menu_slideshow">Presentación</string>
     <string name="first_fragment_label">Etiqueta del primer fragmento</string>
     <string name="second_fragment_label">Etiqueta del segundo fragmento</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <!-- Agrega más strings según sea necesario para tu aplicación -->
 </resources>

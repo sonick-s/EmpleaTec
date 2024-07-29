@@ -12,6 +12,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.omar.sani.empleatec.controlador.ConfigGmail;
 import com.omar.sani.empleatec.controlador.database.login.dbUsuario;
 
 public class registrarCuentaPersonal extends AppCompatActivity {
@@ -67,6 +68,9 @@ public class registrarCuentaPersonal extends AppCompatActivity {
             String monthOfBirth = etMonthOfBirth.getText().toString().trim();
             String yearOfBirth = etYearOfBirth.getText().toString().trim();
             String email = etEmail.getText().toString().trim();
+
+            ConfigGmail.IdGmailUsuario = email;
+
 
             // Validar que todos los campos obligatorios estén llenos
             if (firstName.isEmpty() || lastName.isEmpty() || dayOfBirth.isEmpty() || monthOfBirth.isEmpty()

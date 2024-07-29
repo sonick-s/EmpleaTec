@@ -32,7 +32,7 @@ public class Publicacion extends Fragment {
     private ImageView imageViewFlag;
     private ImageView videoViewMain;
     private ImageButton buttonLike;
-    private ImageButton buttonSendMessage;
+    private ImageButton buttonSendMessage;// Boton para mensje de la publicacion
     private ImageButton buttonShare;
 
     public Publicacion() {
