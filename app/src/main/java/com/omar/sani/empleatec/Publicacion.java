@@ -32,7 +32,7 @@ public class Publicacion extends Fragment {
     private ImageView imageViewFlag;
     private ImageView videoViewMain;
     private ImageButton buttonLike;
-    private ImageButton buttonSendMessage;// Boton para mensje de la publicacion
+    private ImageButton buttonSendMessage; // Boton para mensje de la publicacion
     private ImageButton buttonShare;
 
     public Publicacion() {
@@ -77,8 +77,28 @@ public class Publicacion extends Fragment {
         textViewDescription.setText(description);
         textViewCategoria.setText(category);
         if (imageUri != null) {
-            Glide.with(this).load(imageUri).into(videoViewMain);
+            Glide.with(this).load(imageUri).centerCrop().into(videoViewMain);
         }
+
+        // Configurar la funcionalidad de despliegue de descripción
+        textViewDescription.setMaxLines(3);
+        textViewDescription.setEllipsize(android.text.TextUtils.TruncateAt.END);
+
+        textViewDescription.setOnClickListener(new View.OnClickListener() {
+            private boolean isExpanded = false;
+
+            @Override
+            public void onClick(View v) {
+                if (isExpanded) {
+                    textViewDescription.setMaxLines(3);
+                    textViewDescription.setEllipsize(android.text.TextUtils.TruncateAt.END);
+                } else {
+                    textViewDescription.setMaxLines(Integer.MAX_VALUE);
+                    textViewDescription.setEllipsize(null);
+                }
+                isExpanded = !isExpanded;
+            }
+        });
 
         return rootView;
     }

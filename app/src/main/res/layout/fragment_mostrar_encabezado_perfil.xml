@@ -71,6 +71,29 @@
                 android:paddingStart="24dp"
                 android:paddingEnd="24dp"/>
 
+            <!-- Buttons for Experience and CV -->
+            <Button
+                android:id="@+id/ButtonSubirExperiencia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Subir Experiencia"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textColor="@color/primaryTextColor"
+                android:layout_marginTop="16dp"/>
+
+            <Button
+                android:id="@+id/ButtomDescargarCurriculum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Descargar Curriculum"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:textColor="@color/secondaryTextColor"
+                android:layout_marginTop="12dp"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"/>
         </LinearLayout>
     </ScrollView>
 

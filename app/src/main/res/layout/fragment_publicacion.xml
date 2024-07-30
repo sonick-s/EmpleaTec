@@ -53,8 +53,7 @@
                 android:layout_marginStart="8dp"/>
         </LinearLayout>
 
-        <!-- Video principal de la publicación -->
-
+        <!-- Descripción de la publicación -->
         <TextView
             android:id="@+id/textViewDescription"
             android:layout_width="match_parent"
@@ -64,13 +63,28 @@
             android:layout_marginTop="40dp"
             android:layout_marginEnd="32dp"
             android:text="Me Complace en Presentar la App EmpleaTec"
+            android:textSize="14sp"
+            android:maxLines="3"
+            android:ellipsize="end" />
+
+        <!-- Botón para expandir/contraer la descripción -->
+        <TextView
+            android:id="@+id/buttonExpandCollapse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewDescription"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="8dp"
+            android:text="Mostrar más"
+            android:textColor="@color/secondaryTextColor"
             android:textSize="14sp" />
 
+        <!-- Video principal de la publicación -->
         <ImageView
             android:id="@+id/videoViewMain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textViewDescription"
+            android:layout_below="@id/buttonExpandCollapse"
             android:layout_marginTop="16dp"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"

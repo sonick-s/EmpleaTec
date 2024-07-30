@@ -1,16 +1,18 @@
 package com.omar.sani.empleatec;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.OpenableColumns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -19,7 +21,9 @@ import androidx.fragment.app.Fragment;
 
 import com.omar.sani.empleatec.controlador.database.perfil.dbEducacion;
 
-public class subirEducacionPerfil extends Fragment {
+import java.io.File;
+
+public class SubirEducacionPerfil extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -75,12 +79,12 @@ public class subirEducacionPerfil extends Fragment {
             "Traducción e Interpretación"
     };
 
-    public subirEducacionPerfil() {
+    public SubirEducacionPerfil() {
         // Required empty public constructor
     }
 
-    public static subirEducacionPerfil newInstance(String param1, String param2) {
-        subirEducacionPerfil fragment = new subirEducacionPerfil();
+    public static SubirEducacionPerfil newInstance(String param1, String param2) {
+        SubirEducacionPerfil fragment = new SubirEducacionPerfil();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -156,32 +160,40 @@ public class subirEducacionPerfil extends Fragment {
 
     private final ActivityResultLauncher<Intent> pdfDocumentLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(), result -> {
-                if (result.getResultCode() == getActivity().RESULT_OK && result.getData() != null) {
-                    pdfUri = result.getData().getData();
-                    pdfFileName.setText(pdfUri.getLastPathSegment());
+                if (result.getResultCode() == requireActivity().RESULT_OK) {
+                    if (result.getData() != null) {
+                        pdfUri = result.getData().getData();
+                        String pdfName = getPdfName(pdfUri);
+                        pdfFileName.setText(pdfName);
+                    }
                 }
+            });
+
+    private String getPdfName(Uri pdfUri) {
+        String pdfName = "";
+        if (pdfUri.getScheme().equals("content")) {
+            try (Cursor cursor = requireActivity().getContentResolver().query(pdfUri, null, null, null, null)) {
+                if (cursor != null && cursor.moveToFirst()) {
+                    int nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+                    if (nameIndex != -1) {
+                        pdfName = cursor.getString(nameIndex);
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-    );
+        } else if (pdfUri.getScheme().equals("file")) {
+            pdfName = new File(pdfUri.getPath()).getName();
+        }
+        return pdfName;
+    }
 
     private boolean validateFields() {
-        if (educationInstitution.getText().toString().trim().isEmpty()) {
-            educationInstitution.setError("Este campo es obligatorio");
-            return false;
-        }
-        if (educationDegree.getText().toString().trim().isEmpty()) {
-            educationDegree.setError("Este campo es obligatorio");
-            return false;
-        }
-        if (educationYears.getText().toString().trim().isEmpty()) {
-            educationYears.setError("Este campo es obligatorio");
-            return false;
-        }
-        if (projectCategorySpinner.getSelectedItem() == null) {
-            Toast.makeText(getActivity(), "Seleccione una categoría", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        if (pdfUri == null) {
-            Toast.makeText(getActivity(), "Por favor, suba un archivo PDF", Toast.LENGTH_SHORT).show();
+        if (educationInstitution.getText().toString().trim().isEmpty() ||
+                educationDegree.getText().toString().trim().isEmpty() ||
+                educationYears.getText().toString().trim().isEmpty() ||
+                pdfUri == null) {
+            Toast.makeText(getActivity(), "Por favor, completa todos los campos y selecciona un PDF.", Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;

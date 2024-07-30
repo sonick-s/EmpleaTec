@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.omar.sani.empleatec.R;
 import com.omar.sani.empleatec.controlador.database.perfil.dbContacto;
 import com.omar.sani.empleatec.controlador.database.perfil.dbEducacion;
+import com.omar.sani.empleatec.controlador.database.perfil.dbEncabezado;
 import com.omar.sani.empleatec.controlador.database.perfil.dbExperienciaLaboral;
 import com.omar.sani.empleatec.controlador.database.perfil.dbHabilidades;
 import com.omar.sani.empleatec.controlador.database.perfil.dbProyectos;
@@ -31,6 +32,7 @@ public class GalleryFragment extends Fragment {
     private dbExperienciaLaboral dbExperienciaLaboral;
     private dbHabilidades dbHabilidad;
     private dbProyectos dbProyectos;
+    private dbEncabezado dbEncabezado;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -43,6 +45,7 @@ public class GalleryFragment extends Fragment {
         dbExperienciaLaboral = new dbExperienciaLaboral();
         dbHabilidad = new dbHabilidades();
         dbProyectos = new dbProyectos();
+        dbEncabezado = new dbEncabezado();
 
         // Obtener datos de Firebase
         dbContacto.obtenerDatosContacto(root);
@@ -50,6 +53,7 @@ public class GalleryFragment extends Fragment {
         dbExperienciaLaboral.obtenerDatosExperiencia(root);
         dbHabilidad.obtenerDatosHabilidades(root);
         dbProyectos.obtenerDatosProyectos(root);
+        dbEncabezado.obtenerDatosEncabezado(root);
 
         // Cargar los fragmentos
         loadMostrarExperienciaLaboralPerfilFragment("Param1Value", "Param2Value");

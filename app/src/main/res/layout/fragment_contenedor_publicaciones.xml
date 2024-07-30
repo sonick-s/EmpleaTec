@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray"
+    tools:context=".contenedorPublicaciones">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- FrameLayout for subirContacto with Divider -->
+        <FrameLayout
+            android:id="@+id/subirContacto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_background_white"
+            android:layout_marginBottom="8dp"
+            android:padding="16dp">
+            <!-- Add content here -->
+        </FrameLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- FrameLayout for subirEducacion with Divider -->
+        <FrameLayout
+            android:id="@+id/subirEducacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_background_white"
+            android:layout_marginBottom="8dp"
+            android:padding="16dp">
+            <!-- Add content here -->
+        </FrameLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- FrameLayout for subirEncabezado with Divider -->
+        <FrameLayout
+            android:id="@+id/subirEncabezado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_background_white"
+            android:layout_marginBottom="8dp"
+            android:padding="16dp">
+            <!-- Add content here -->
+        </FrameLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- FrameLayout for subirExperienciaLaboral with Divider -->
+        <FrameLayout
+            android:id="@+id/subirExperienciaLaboral"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_background_white"
+            android:layout_marginBottom="8dp"
+            android:padding="16dp">
+            <!-- Add content here -->
+        </FrameLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- FrameLayout for subirHabilidad with Divider -->
+        <FrameLayout
+            android:id="@+id/subirHabilidad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_background_white"
+            android:layout_marginBottom="8dp"
+            android:padding="16dp">
+            <!-- Add content here -->
+        </FrameLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- FrameLayout for subirProyecto without Divider -->
+        <FrameLayout
+            android:id="@+id/subirProyecto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_background_white"
+            android:padding="16dp">
+            <!-- Add content here -->
+        </FrameLayout>
+
+    </LinearLayout>
+
+</ScrollView>
