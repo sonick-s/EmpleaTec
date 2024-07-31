@@ -4,48 +4,55 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/darker_gray"
     tools:context=".ui.home.HomeFragment">
 
-    <ScrollView
-        android:id="@+id/scrollView"
+    <FrameLayout
+        android:id="@+id/fragment_home_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        android:layout_height="match_parent">
 
-
-        <LinearLayout
+        <ScrollView
+            android:id="@+id/scrollView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <FrameLayout
-                android:id="@+id/crearPublicacionContainer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
 
             <LinearLayout
-                android:id="@+id/linearPublicaciones"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"/>
+                android:orientation="vertical">
 
-            <FrameLayout
-                android:id="@+id/publicacionContainer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                <FrameLayout
+                    android:id="@+id/crearPublicacionContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
-        </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/linearPublicaciones"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"/>
 
-    </ScrollView>
+                <FrameLayout
+                    android:id="@+id/publicacionContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="gone"/> <!-- Oculto por defecto -->
+            </LinearLayout>
+
+        </ScrollView>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"/> <!-- Oculto por defecto -->
+
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

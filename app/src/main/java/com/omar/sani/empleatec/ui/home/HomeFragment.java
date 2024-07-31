@@ -70,7 +70,7 @@ public class HomeFragment extends Fragment {
                     progressBar.setVisibility(View.GONE);
                     actualizarPublicaciones();
                 }
-            }, 2000); // Ajusta el tiempo de carga como necesites
+            }, 1000); // Ajusta el tiempo de carga como necesites
         }
     }
 
@@ -113,4 +113,5 @@ public class HomeFragment extends Fragment {
         Toast.makeText(getContext(), "Actualizando publicaciones...", Toast.LENGTH_SHORT).show();
         cargarPublicaciones(); // Llama a cargarPublicaciones para refrescar
     }
+
 }
