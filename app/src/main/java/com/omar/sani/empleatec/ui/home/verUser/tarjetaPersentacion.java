@@ -1,5 +1,6 @@
 package com.omar.sani.empleatec.ui.home.verUser;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,32 +13,39 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.omar.sani.empleatec.R;
 
 public class tarjetaPersentacion extends Fragment {
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_FIRST_NAME = "firstName";
+    private static final String ARG_LAST_NAME = "lastName";
+    private static final String ARG_DESCRIPTION = "description";
+    private static final String ARG_IMAGE_URI = "imageUri";
 
-    private String mParam1;
-    private String mParam2;
+    private String firstName;
+    private String lastName;
+    private String description;
+    private String imageUri;
 
     private ImageView profileImage;
     private Button whatsappButton;
     private Button viewMoreButton;
-    private TextView firstName;
-    private TextView lastName;
-    private TextView description;
+    private TextView firstNameTextView;
+    private TextView lastNameTextView;
+    private TextView descriptionTextView;
 
     public tarjetaPersentacion() {
         // Required empty public constructor
     }
 
-    public static tarjetaPersentacion newInstance(String param1, String param2) {
+    public static tarjetaPersentacion newInstance(String firstName, String lastName, String description, String imageUri) {
         tarjetaPersentacion fragment = new tarjetaPersentacion();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString(ARG_FIRST_NAME, firstName);
+        args.putString(ARG_LAST_NAME, lastName);
+        args.putString(ARG_DESCRIPTION, description);
+        args.putString(ARG_IMAGE_URI, imageUri);
         fragment.setArguments(args);
         return fragment;
     }
@@ -46,8 +54,10 @@ public class tarjetaPersentacion extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            firstName = getArguments().getString(ARG_FIRST_NAME);
+            lastName = getArguments().getString(ARG_LAST_NAME);
+            description = getArguments().getString(ARG_DESCRIPTION);
+            imageUri = getArguments().getString(ARG_IMAGE_URI);
         }
     }
 
@@ -66,14 +76,17 @@ public class tarjetaPersentacion extends Fragment {
         profileImage = view.findViewById(R.id.profile_image);
         whatsappButton = view.findViewById(R.id.whatsapp_button);
         viewMoreButton = view.findViewById(R.id.view_more_button);
-        firstName = view.findViewById(R.id.first_name);
-        lastName = view.findViewById(R.id.last_name);
-        description = view.findViewById(R.id.description);
+        firstNameTextView = view.findViewById(R.id.first_name);
+        lastNameTextView = view.findViewById(R.id.last_name);
+        descriptionTextView = view.findViewById(R.id.description);
 
-        // Aquí puedes configurar los valores de los componentes si es necesario
-        // Por ejemplo:
-        // firstName.setText("John");
-        // lastName.setText("Doe");
-        // description.setText("Software Developer");
+        // Configurar los valores de los componentes
+        firstNameTextView.setText(firstName);
+        lastNameTextView.setText(lastName);
+        descriptionTextView.setText(description);
+
+        if (imageUri != null) {
+            Glide.with(this).load(Uri.parse(imageUri)).into(profileImage);
+        }
     }
 }

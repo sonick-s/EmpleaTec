@@ -17,7 +17,6 @@ import com.omar.sani.empleatec.controlador.database.perfil.dbExperienciaLaboral;
 import com.omar.sani.empleatec.controlador.database.perfil.dbHabilidades;
 import com.omar.sani.empleatec.controlador.database.perfil.dbProyectos;
 import com.omar.sani.empleatec.databinding.FragmentGalleryBinding;
-import com.omar.sani.empleatec.mostrarContactoPerfil;
 import com.omar.sani.empleatec.mostrarEducacionPerfil;
 import com.omar.sani.empleatec.mostrarEncabezadoPerfil;
 import com.omar.sani.empleatec.mostrarExperienciaLaboralPerfil;
@@ -57,7 +56,7 @@ public class GalleryFragment extends Fragment {
 
         // Cargar los fragmentos
         loadMostrarExperienciaLaboralPerfilFragment("Param1Value", "Param2Value");
-        loadMostrarContactoPerfilFragment("Param1Value", "Param2Value");
+      //  loadMostrarContactoPerfilFragment("Param1Value", "Param2Value");
         loadMostrarEducacionPerfilFragment("Param1Value", "Param2Value");
         loadMostrarEncabezadoPerfilFragment("Param1Value", "Param2Value");
         loadMostrarHabilidadPerfilFragment("Param1Value", "Param2Value");
@@ -73,12 +72,12 @@ public class GalleryFragment extends Fragment {
         transaction.commit();
     }
 
-    private void loadMostrarContactoPerfilFragment(String param1, String param2) {
+   /* private void loadMostrarContactoPerfilFragment(String param1, String param2) {
         mostrarContactoPerfil fragment = mostrarContactoPerfil.newInstance(param1, param2);
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container_contacto, fragment);
         transaction.commit();
-    }
+    }*/
 
     private void loadMostrarEducacionPerfilFragment(String param1, String param2) {
         mostrarEducacionPerfil fragment = mostrarEducacionPerfil.newInstance(param1, param2);

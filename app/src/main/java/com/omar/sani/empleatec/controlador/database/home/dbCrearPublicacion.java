@@ -120,6 +120,7 @@ public class dbCrearPublicacion {
         private String imageUrl;
         private String idGmailUsuario;
         private String idGmailEmpresa;
+        private String username;
 
         public Publicacion(String description, String category, String imageUrl, String idGmailUsuario, String idGmailEmpresa) {
             this.description = description;
@@ -140,6 +141,8 @@ public class dbCrearPublicacion {
         public String getImageUrl() {
             return imageUrl;
         }
+
+
 
         public String getIdGmailUsuario() {
             return idGmailUsuario;

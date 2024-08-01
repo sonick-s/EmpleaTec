@@ -56,7 +56,7 @@ public class registrarCuentaPersonal extends AppCompatActivity {
         btnNext = findViewById(R.id.btnNext);
 
         // Inicialización de la base de datos de usuario
-        usuarioDatabase = new dbUsuario();
+        dbUsuario usuarioDatabase = new dbUsuario();
 
         btnUploadPhoto.setOnClickListener(view -> openGallery());
 

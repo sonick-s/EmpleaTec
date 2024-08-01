@@ -20,31 +20,36 @@ public class Publicacion extends Fragment {
     private static final String ARG_DESCRIPTION = "description";
     private static final String ARG_CATEGORY = "category";
     private static final String ARG_IMAGE_URI = "imageUri";
+    private static final String ARG_USERNAME = "username";
+    private static final String ARG_USER_IMAGE_URI = "userImageUri";
 
     private String description;
     private String category;
     private Uri imageUri;
+    private String username;
+    private Uri userImageUri;
 
     private ImageView imageViewProfile;
     private TextView textViewDescription;
     private TextView textViewUsername;
-    private TextView textViewCategoria; // Cambiado a textViewCategoria para que coincida con el XML
-    private ImageView imageViewFlag;
+    private TextView textViewCategoria;
     private ImageView videoViewMain;
     private ImageButton buttonLike;
-    private ImageButton buttonSendMessage; // Boton para mensje de la publicacion
+    private ImageButton buttonSendMessage;
     private ImageButton buttonShare;
 
     public Publicacion() {
         // Required empty public constructor
     }
 
-    public static Publicacion newInstance(String description, String category, Uri imageUri) {
+    public static Publicacion newInstance(String description, String category, Uri imageUri, String username, Uri userImageUri) {
         Publicacion fragment = new Publicacion();
         Bundle args = new Bundle();
         args.putString(ARG_DESCRIPTION, description);
         args.putString(ARG_CATEGORY, category);
         args.putParcelable(ARG_IMAGE_URI, imageUri);
+        args.putString(ARG_USERNAME, username);
+        args.putParcelable(ARG_USER_IMAGE_URI, userImageUri);
         fragment.setArguments(args);
         return fragment;
     }
@@ -56,6 +61,8 @@ public class Publicacion extends Fragment {
             description = getArguments().getString(ARG_DESCRIPTION);
             category = getArguments().getString(ARG_CATEGORY);
             imageUri = getArguments().getParcelable(ARG_IMAGE_URI);
+            username = getArguments().getString(ARG_USERNAME);
+            userImageUri = getArguments().getParcelable(ARG_USER_IMAGE_URI);
         }
     }
 
@@ -66,8 +73,7 @@ public class Publicacion extends Fragment {
         imageViewProfile = rootView.findViewById(R.id.imageViewProfile);
         textViewDescription = rootView.findViewById(R.id.textViewDescription);
         textViewUsername = rootView.findViewById(R.id.textViewUsername);
-        textViewCategoria = rootView.findViewById(R.id.textViewCategoria); // Cambiado a textViewCategoria para que coincida con el XML
-        imageViewFlag = rootView.findViewById(R.id.imageViewFlag);
+        textViewCategoria = rootView.findViewById(R.id.textViewCategoria);
         videoViewMain = rootView.findViewById(R.id.videoViewMain);
         buttonLike = rootView.findViewById(R.id.buttonLike);
         buttonSendMessage = rootView.findViewById(R.id.buttonSendMessage);
@@ -76,8 +82,14 @@ public class Publicacion extends Fragment {
         // Configurar los datos de la publicación
         textViewDescription.setText(description);
         textViewCategoria.setText(category);
+        textViewUsername.setText(username);
         if (imageUri != null) {
             Glide.with(this).load(imageUri).centerCrop().into(videoViewMain);
+        }
+
+        // Configurar la imagen del perfil del usuario
+        if (userImageUri != null) {
+            Glide.with(this).load(userImageUri).circleCrop().into(imageViewProfile);
         }
 
         // Configurar la funcionalidad de despliegue de descripción
@@ -106,7 +118,5 @@ public class Publicacion extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        // Aquí no es necesario cargar más datos desde Firestore, ya que lo maneja HomeFragment
     }
 }

@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -13,6 +15,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -25,8 +28,6 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
     private FirebaseAuth mAuth;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +52,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // Configurar el OnClickListener para el FAB
-
-
-
         binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-// Usuarios button click listener
+        // Usuarios button click listener
         binding.appBarMain.Usuarios.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -108,6 +106,28 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        // Configurar el encabezado del NavigationView
+        configureNavigationHeader(currentUser, navigationView);
+    }
+
+    private void configureNavigationHeader(FirebaseUser currentUser, NavigationView navigationView) {
+        View headerView = navigationView.getHeaderView(0);
+        ImageView imageView = headerView.findViewById(R.id.imageView);
+        TextView textViewTitle = headerView.findViewById(R.id.textView);
+       // TextView textViewSubtitle = headerView.findViewById(R.id.textViewSubtitle); // Asegúrate de que este id es único en tu XML
+
+        // Actualizar contenido del encabezado con datos del usuario
+        if (currentUser != null) {
+            String displayName = currentUser.getDisplayName(); // Nombre del usuario
+            String photoUrl = currentUser.getPhotoUrl() != null ? currentUser.getPhotoUrl().toString() : null; // URL de la foto
+
+            if (photoUrl != null) {
+                Glide.with(this).load(photoUrl).into(imageView);
+            }
+            textViewTitle.setText(displayName != null ? displayName : "Usuario");
+          //  textViewSubtitle.setText(currentUser.getEmail()); // Ejemplo de email
+        }
     }
 
     @Override
@@ -122,6 +142,4 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
-
-
 }

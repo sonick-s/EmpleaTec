@@ -2,61 +2,101 @@ package com.omar.sani.empleatec.ui.home.verUser;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.ScrollView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.omar.sani.empleatec.R;
+import com.omar.sani.empleatec.controlador.database.login.dbUsuario;
+
+import java.util.List;
 
 public class mostrarUsuarios extends Fragment {
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    private String mParam1;
-    private String mParam2;
+    private LinearLayout linearLayoutUsuarios;
+    private ProgressBar progressBar;
+    private boolean isLoading = false;
 
     public mostrarUsuarios() {
         // Required empty public constructor
     }
 
-    public static mostrarUsuarios newInstance(String param1, String param2) {
-        mostrarUsuarios fragment = new mostrarUsuarios();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_mostrar_usuarios, container, false);
+
+        linearLayoutUsuarios = rootView.findViewById(R.id.linearUsuarios);
+        progressBar = rootView.findViewById(R.id.progressBarUsuarios);
+        ScrollView scrollView = rootView.findViewById(R.id.scrollViewUsuarios);
+
+        cargarUsuarios();
+
+        scrollView.setOnTouchListener((v, event) -> {
+            if (event.getAction() == MotionEvent.ACTION_DOWN && scrollView.getScrollY() <= 0) {
+                isLoading = true;
+                mostrarCarga();
+            } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                isLoading = false;
+                progressBar.setVisibility(View.GONE);
+            }
+            return false;
+        });
+
+        return rootView;
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+    private void mostrarCarga() {
+        if (isLoading) {
+            progressBar.setVisibility(View.VISIBLE);
+            progressBar.postDelayed(() -> {
+                if (isLoading) {
+                    progressBar.setVisibility(View.GONE);
+                    actualizarUsuarios();
+                }
+            }, 1000);
         }
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_mostrar_usuarios, container, false);
+    private void cargarUsuarios() {
+        dbUsuario db = new dbUsuario();
+        db.obtenerDatosDeUsuarios(new dbUsuario.OnUsuariosLoadedListener() {
+            @Override
+            public void onSuccess(List<dbUsuario.Usuario> usuariosList) {
+                mostrarUsuarios(usuariosList);
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                Toast.makeText(getContext(), "Error al obtener los usuarios: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    private void mostrarUsuarios(List<dbUsuario.Usuario> usuariosList) {
+        for (dbUsuario.Usuario usuario : usuariosList) {
+            String firstName = usuario.getFirstName();
+            String lastName = usuario.getLastName();
+            String description = ""; // Si tienes una descripción, ajusta según sea necesario
+            String imageUri = usuario.getImageUrl().toString();
 
-        // Iniciar el fragmento tarjetaPersentacion dentro de mostrarUsuarios
-        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        tarjetaPersentacion tarjetaFragment = tarjetaPersentacion.newInstance(mParam1, mParam2);
-        transaction.replace(R.id.fragment_mostrar_Usuarios, tarjetaFragment);
-        transaction.commit();
+            Fragment fragment = tarjetaPersentacion.newInstance(firstName, lastName, description, imageUri);
+            getChildFragmentManager().beginTransaction()
+                    .add(R.id.linearUsuarios, fragment)
+                    .commit();
+        }
+    }
+
+    private void actualizarUsuarios() {
+        Toast.makeText(getContext(), "Actualizando usuarios...", Toast.LENGTH_SHORT).show();
+        cargarUsuarios();
     }
 }

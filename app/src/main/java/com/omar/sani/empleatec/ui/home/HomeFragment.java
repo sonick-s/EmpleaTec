@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import com.omar.sani.empleatec.Publicacion;
 import com.omar.sani.empleatec.R;
 import com.omar.sani.empleatec.controlador.database.home.dbCrearPublicacion;
+import com.omar.sani.empleatec.controlador.database.login.dbUsuario;
 import com.omar.sani.empleatec.crearPublicacion;
 
 import java.util.List;
@@ -25,6 +26,8 @@ public class HomeFragment extends Fragment {
     private LinearLayout linearLayoutPublicaciones;
     private ProgressBar progressBar;
     private boolean isLoading = false; // Variable para controlar el estado de carga
+    private dbUsuario usuario; // Declara la variable dbUsuario
+
 
     public HomeFragment() {
         // Required empty public constructor
@@ -38,6 +41,8 @@ public class HomeFragment extends Fragment {
         linearLayoutPublicaciones = rootView.findViewById(R.id.linearPublicaciones);
         progressBar = rootView.findViewById(R.id.progressBar);
         ScrollView scrollView = rootView.findViewById(R.id.scrollView);
+
+        usuario = new dbUsuario();
 
         // Mostrar el fragmento crearPublicacion
         mostrarCrearPublicacion();
@@ -97,17 +102,39 @@ public class HomeFragment extends Fragment {
     }
 
     private void mostrarPublicaciones(List<dbCrearPublicacion.Publicacion> publicacionesList) {
-        for (dbCrearPublicacion.Publicacion publicacion : publicacionesList) {
-            String description = publicacion.getDescription();
-            String category = publicacion.getCategory();
-            String imageUri = publicacion.getImageUrl();
+        // Obtener el nombre del usuario y la imagen de perfil
+        dbUsuario db = new dbUsuario();
+        db.obtenerDatosDeUsuarios(new dbUsuario.OnUsuariosLoadedListener() {
+            @Override
+            public void onSuccess(List<dbUsuario.Usuario> usuarios) {
+                // Asumiendo que seleccionas el primer usuario en la lista; ajusta esto según sea necesario
+                if (!usuarios.isEmpty()) {
+                    dbUsuario.Usuario usuario = usuarios.get(0); // O usa otro método para seleccionar el usuario deseado
+                    String username = usuario.getFirstName();
+                    Uri userImageUri = usuario.getImageUrl();
 
-            Fragment fragment = Publicacion.newInstance(description, category, Uri.parse(imageUri));
-            getChildFragmentManager().beginTransaction()
-                    .add(R.id.linearPublicaciones, fragment)
-                    .commit();
-        }
+                    for (dbCrearPublicacion.Publicacion publicacion : publicacionesList) {
+                        String description = publicacion.getDescription();
+                        String category = publicacion.getCategory();
+                        String imageUri = publicacion.getImageUrl();
+
+                        // Crear el fragmento con los parámetros necesarios
+                        Fragment fragment = Publicacion.newInstance(description, category, Uri.parse(imageUri), username, userImageUri);
+                        getChildFragmentManager().beginTransaction()
+                                .add(R.id.linearPublicaciones, fragment)
+                                .commit();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                Toast.makeText(getContext(), "Error al obtener datos del usuario: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
+
+
 
     private void actualizarPublicaciones() {
         Toast.makeText(getContext(), "Actualizando publicaciones...", Toast.LENGTH_SHORT).show();

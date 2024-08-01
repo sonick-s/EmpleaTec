@@ -18,6 +18,14 @@ import java.util.List;
 
 public class mostrarContactoPerfil extends Fragment implements ValidarContacto.ContactoListener {
 
+
+    /* Este Frame va en Home Galery xml, pero fue sacado porque el encabezado ya muestra el contacto
+    <FrameLayout
+                android:id="@+id/fragment_container_contacto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+     */
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 

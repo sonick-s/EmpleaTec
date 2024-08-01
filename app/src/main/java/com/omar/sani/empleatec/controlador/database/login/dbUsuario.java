@@ -9,11 +9,13 @@ import android.view.View;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class dbUsuario {
@@ -26,17 +28,14 @@ public class dbUsuario {
     }
 
     public void enviarDatosALaBaseDeDatos(String firstName, String lastName, String dateOfBirth, String email, Uri imageUri, View view) {
-        // Validar que la URI de la imagen no sea nula
         if (imageUri == null) {
             Snackbar.make(view, "Por favor, carga una imagen de perfil", Snackbar.LENGTH_SHORT).show();
             return;
         }
 
-        // Subir la imagen a Firebase Storage
         subirImagenAFirebase(imageUri, new OnImageUploadListener() {
             @Override
             public void onSuccess(String imageUrl) {
-                // Crear un mapa de datos con los campos del usuario
                 Map<String, Object> usuario = new HashMap<>();
                 usuario.put("TipoEmpresa", IdGmailEmpresa);
                 usuario.put("TipoUsuario", IdGmailUsuario);
@@ -46,7 +45,6 @@ public class dbUsuario {
                 usuario.put("Correo Electronico", email);
                 usuario.put("Imagen de Perfil", imageUrl);
 
-                // Enviar los datos a Firestore
                 db.collection("usuarios")
                         .add(usuario)
                         .addOnSuccessListener(documentReference -> Snackbar.make(view, "Datos enviados correctamente a Firestore", Snackbar.LENGTH_SHORT).show())
@@ -60,47 +58,54 @@ public class dbUsuario {
         });
     }
 
-    private void subirImagenAFirebase(Uri imageUri, final OnImageUploadListener listener) {
-        if (imageUri != null) {
-            StorageReference storageRef = storage.getReference().child("images/" + System.currentTimeMillis() + ".jpg");
-            storageRef.putFile(imageUri)
-                    .addOnSuccessListener(taskSnapshot -> storageRef.getDownloadUrl().addOnSuccessListener(uri -> listener.onSuccess(uri.toString())))
-                    .addOnFailureListener(listener::onFailure);
-        } else {
-            listener.onFailure(new Exception("La URI de la imagen es nula"));
+    private void subirImagenAFirebase(Uri imageUri, OnImageUploadListener listener) {
+        if (imageUri == null) {
+            if (listener != null) {
+                listener.onFailure(new Exception("La URI de la imagen es nula"));
+            }
+            return;
         }
+
+        StorageReference storageRef = storage.getReference();
+        StorageReference imageRef = storageRef.child("profile_images/" + imageUri.getLastPathSegment());
+
+        UploadTask uploadTask = imageRef.putFile(imageUri);
+        uploadTask.addOnSuccessListener(taskSnapshot -> imageRef.getDownloadUrl().addOnSuccessListener(uri -> {
+            String imageUrl = uri.toString();
+            if (listener != null) {
+                listener.onSuccess(imageUrl);
+            }
+        })).addOnFailureListener(e -> {
+            if (listener != null) {
+                listener.onFailure(e);
+            }
+        });
     }
 
     public void obtenerDatosDeUsuarios(final OnUsuariosLoadedListener listener) {
         db.collection("usuarios")
                 .get()
-                .addOnSuccessListener(new com.google.android.gms.tasks.OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                            // Obtener datos de cada documento
-                            String tipoEmpresa = documentSnapshot.getString("TipoEmpresa");
-                            String tipoUsuario = documentSnapshot.getString("TipoUsuario");
-                            String firstName = documentSnapshot.getString("Primer Nombre");
-                            String lastName = documentSnapshot.getString("Apellido");
-                            String dateOfBirth = documentSnapshot.getString("Fecha de Nacimiento");
-                            String email = documentSnapshot.getString("Correo Electronico");
-                            String imageUrl = documentSnapshot.getString("Imagen de Perfil");
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    List<Usuario> usuarios = new ArrayList<>();
+                    for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                        String tipoUsuario = documentSnapshot.getString("TipoUsuario");
+                        String firstName = documentSnapshot.getString("Primer Nombre");
+                        String lastName = documentSnapshot.getString("Apellido");
+                        String dateOfBirth = documentSnapshot.getString("Fecha de Nacimiento");
+                        String email = documentSnapshot.getString("Correo Electronico");
+                        String imageUrl = documentSnapshot.getString("Imagen de Perfil");
 
-                            // Llamar al método onSuccess del listener para cada documento
-                            if (listener != null) {
-                                listener.onSuccess(tipoEmpresa, tipoUsuario, firstName, lastName, dateOfBirth, email, Uri.parse(imageUrl));
-                            }
-                        }
+                        Usuario usuario = new Usuario(tipoUsuario, firstName, lastName, dateOfBirth, email, Uri.parse(imageUrl));
+                        usuarios.add(usuario);
+                    }
+
+                    if (listener != null) {
+                        listener.onSuccess(usuarios);
                     }
                 })
-                .addOnFailureListener(new com.google.android.gms.tasks.OnFailureListener() {
-                    @Override
-                    public void onFailure(Exception e) {
-                        // Manejar el error de obtener datos de usuarios
-                        if (listener != null) {
-                            listener.onFailure(e);
-                        }
+                .addOnFailureListener(e -> {
+                    if (listener != null) {
+                        listener.onFailure(e);
                     }
                 });
     }
@@ -111,7 +116,32 @@ public class dbUsuario {
     }
 
     public interface OnUsuariosLoadedListener {
-        void onSuccess(String tipoEmpresa, String tipoUsuario, String firstName, String lastName, String dateOfBirth, String email, Uri imageUrl);
+        void onSuccess(List<Usuario> usuarios);
         void onFailure(Exception e);
+    }
+
+    public static class Usuario {
+        private String tipoUsuario;
+        private String firstName;
+        private String lastName;
+        private String dateOfBirth;
+        private String email;
+        private Uri imageUrl;
+
+        public Usuario(String tipoUsuario, String firstName, String lastName, String dateOfBirth, String email, Uri imageUrl) {
+            this.tipoUsuario = tipoUsuario;
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.dateOfBirth = dateOfBirth;
+            this.email = email;
+            this.imageUrl = imageUrl;
+        }
+
+        public String getTipoUsuario() { return tipoUsuario; }
+        public String getFirstName() { return firstName; }
+        public String getLastName() { return lastName; }
+        public String getDateOfBirth() { return dateOfBirth; }
+        public String getEmail() { return email; }
+        public Uri getImageUrl() { return imageUrl; }
     }
 }

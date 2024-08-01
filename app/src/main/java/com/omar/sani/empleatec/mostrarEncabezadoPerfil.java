@@ -14,22 +14,18 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.omar.sani.empleatec.controlador.database.perfil.dbEncabezado;
-import com.omar.sani.empleatec.ui.gallery.ValidarEncabezado;
+import com.bumptech.glide.Glide;
+import com.omar.sani.empleatec.controlador.database.login.dbUsuario;
 
 import java.util.List;
 
-public class mostrarEncabezadoPerfil extends Fragment implements ValidarEncabezado.EncabezadoListener {
+public class mostrarEncabezadoPerfil extends Fragment implements dbUsuario.OnUsuariosLoadedListener {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
     private String param1;
     private String param2;
-
-    private String userName;
-    private String userBio;
-    private String profileImageUrl;
 
     private ImageView profilePicture;
     private Button uploadPictureButton;
@@ -69,13 +65,9 @@ public class mostrarEncabezadoPerfil extends Fragment implements ValidarEncabeza
         // Configurar los botones
         configurarBotones();
 
-        // Crear instancia de dbEncabezado y obtener la instancia de ValidarEncabezado
-        dbEncabezado dbEncabezado = new dbEncabezado();
-        ValidarEncabezado validarEncabezado = dbEncabezado.getValidarEncabezado();
-
-        // Establecer este fragmento como el listener para recibir datos de encabezado
-        validarEncabezado.setEncabezadoListener(this);
-        dbEncabezado.obtenerDatosEncabezado(view);
+        // Obtener datos del usuario desde Firestore
+        dbUsuario dbUsuario = new dbUsuario();
+        dbUsuario.obtenerDatosDeUsuarios(this);
 
         return view;
     }
@@ -88,7 +80,7 @@ public class mostrarEncabezadoPerfil extends Fragment implements ValidarEncabeza
 
         subirExperienciaButton.setOnClickListener(v -> {
             // Mostrar el fragmento contenedorPublicaciones desde la parte inferior
-            contenedorPublicaciones fragment = contenedorPublicaciones.newInstance(userName, userBio);
+            contenedorPublicaciones fragment = contenedorPublicaciones.newInstance(param1, param2);
             FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
             transaction.setCustomAnimations(R.anim.slide_in_up, R.anim.slide_out_down);
             transaction.add(R.id.fragment_container_emergente, fragment); // Asegúrate de tener un contenedor en el layout
@@ -109,11 +101,17 @@ public class mostrarEncabezadoPerfil extends Fragment implements ValidarEncabeza
     }
 
     @Override
-    public void onEncabezadoDataReceived(List<ValidarEncabezado.Encabezado> encabezadoList) {
-        if (encabezadoList != null && !encabezadoList.isEmpty()) {
-            ValidarEncabezado.Encabezado encabezado = encabezadoList.get(0); // Obtiene el primer encabezado para mostrar
-            userNameView.setText(encabezado.getUserName());
-            userBioView.setText(encabezado.getUserBio());
+    public void onSuccess(List<dbUsuario.Usuario> usuarios) {
+        if (usuarios != null && !usuarios.isEmpty()) {
+            dbUsuario.Usuario usuario = usuarios.get(0); // Obtiene el primer usuario para mostrar
+            userNameView.setText(usuario.getFirstName() + " " + usuario.getLastName());
+            userBioView.setText(usuario.getDateOfBirth() + "\n" + usuario.getEmail());
+            Glide.with(this).load(usuario.getImageUrl().toString()).into(profilePicture);
         }
+    }
+
+    @Override
+    public void onFailure(Exception e) {
+        Toast.makeText(getContext(), "Error al cargar los datos del usuario: " + e.getMessage(), Toast.LENGTH_SHORT).show();
     }
 }
