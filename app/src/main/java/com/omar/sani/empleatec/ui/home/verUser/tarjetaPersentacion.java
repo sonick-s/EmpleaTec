@@ -12,9 +12,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.bumptech.glide.Glide;
+import com.omar.sani.empleatec.Maps;
 import com.omar.sani.empleatec.R;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 public class tarjetaPersentacion extends Fragment {
 
@@ -34,6 +37,7 @@ public class tarjetaPersentacion extends Fragment {
     private TextView firstNameTextView;
     private TextView lastNameTextView;
     private TextView descriptionTextView;
+    private Button mapsButton;
 
     public tarjetaPersentacion() {
         // Required empty public constructor
@@ -79,6 +83,7 @@ public class tarjetaPersentacion extends Fragment {
         firstNameTextView = view.findViewById(R.id.first_name);
         lastNameTextView = view.findViewById(R.id.last_name);
         descriptionTextView = view.findViewById(R.id.description);
+        mapsButton = view.findViewById(R.id.maps_button);
 
         // Configurar los valores de los componentes
         firstNameTextView.setText(firstName);
@@ -88,5 +93,11 @@ public class tarjetaPersentacion extends Fragment {
         if (imageUri != null) {
             Glide.with(this).load(Uri.parse(imageUri)).into(profileImage);
         }
+
+        mapsButton.setOnClickListener(v -> {
+            Maps mapsFragment = new Maps();
+            FragmentManager fragmentManager = getParentFragmentManager();
+            mapsFragment.show(fragmentManager, "MapsFragment");
+        });
     }
 }

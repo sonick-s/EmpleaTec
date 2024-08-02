@@ -21,9 +21,9 @@
             android:orientation="horizontal"
             android:padding="16dp">
 
-            <!-- Contenedor vertical para la imagen y el botón -->
+            <!-- Contenedor vertical para la imagen y los botones -->
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="177dp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="16dp">
@@ -31,26 +31,43 @@
                 <!-- Imagen en la parte izquierda -->
                 <ImageView
                     android:id="@+id/profile_image"
-                    android:layout_width="105dp"
-                    android:layout_height="97dp"
+                    android:layout_width="159dp"
+                    android:layout_height="139dp"
                     android:layout_marginBottom="8dp"
                     android:contentDescription="@string/profile_image"
                     android:scaleType="centerCrop"
                     android:src="@drawable/empleatec" />
-                <!-- Botón de WhatsApp -->
-                <Button
-                    android:id="@+id/whatsapp_button"
+
+                <!-- Contenedor horizontal para los botones -->
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="WhatsApp"
-                    android:backgroundTint="@color/black"
-                    android:textColor="@android:color/white" />
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal">
+
+                    <!-- Botón de WhatsApp -->
+                    <Button
+                        android:id="@+id/whatsapp_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/black"
+                        android:text="WhatsApp"
+                        android:textColor="@android:color/white" />
+
+                    <!-- Botón de Maps -->
+                    <Button
+                        android:id="@+id/maps_button"
+                        android:layout_width="33dp"
+                        android:layout_height="34dp"
+                        android:layout_marginStart="8dp"
+                        android:background="@drawable/ubicacion" />
+                </LinearLayout>
             </LinearLayout>
 
             <!-- Contenedor de texto en la parte derecha -->
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="183dp"
+                android:layout_height="230dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 

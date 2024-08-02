@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Maps">
+
+    <!-- Fragmento del mapa -->
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- Contenedor del BottomSheet -->
+    <LinearLayout
+        android:id="@+id/bottom_sheet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="vertical"
+        android:background="@android:color/white"
+        android:padding="16dp">
+
+        <!-- Spinner para seleccionar el tipo de mapa -->
+        <Spinner
+            android:id="@+id/spinner_map_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/map_types" />
+
+        <!-- Botón para alternar el zoom -->
+        <Button
+            android:id="@+id/button_toggle_zoom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Botones de Zoom"
+            android:layout_marginTop="10dp" />
+
+        <!-- Botón para centrar el mapa en Bogotá -->
+        <Button
+            android:id="@+id/button_center_bogota"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Centro de Bogotá"
+            android:layout_marginTop="10dp" />
+
+        <!-- Botón para animar el edificio de Moscú -->
+        <Button
+            android:id="@+id/button_animate_pyramids"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Animar Edificio Moscú"
+            android:layout_marginTop="10dp" />
+
+        <!-- Botón para mostrar la posición de la cámara -->
+        <Button
+            android:id="@+id/button_show_camera_position"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mostrar posición de la cámara"
+            android:layout_marginTop="10dp" />
+
+        <!-- Botón para añadir un marcador en París -->
+        <Button
+            android:id="@+id/button_add_paris_marker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Añadir marcado"
+            android:layout_marginTop="10dp" />
+
+        <!-- Grupo de botones de radio para seleccionar el estilo -->
+        <RadioGroup
+            android:id="@+id/radio_group_styles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+
+            <RadioButton
+                android:id="@+id/radio_style1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Estilo negro" />
+
+            <RadioButton
+                android:id="@+id/radio_style2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Estilo blanco" />
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <!-- Botón flotante para abrir el BottomSheet -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_open_bottom_sheet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"
+        android:src="@drawable/like" />
+
+</FrameLayout>
